@@ -27,6 +27,7 @@ public class enemy_AI : MonoBehaviour
     public float[] min_max_distance_from_player;
 
     bool isBeingHit = false;
+    bool isFainted = false;
 
     void Start()
     {
@@ -55,10 +56,11 @@ public class enemy_AI : MonoBehaviour
             healthbar.GetComponent<Slider>().value = health;
         }
 
-        if (health >= 1f)
+        if (health >= 1f && !isFainted)
         {
+            isFainted = true;
             faint();
-            gameLogic.GetComponent<gameLogic>().StartCoroutine("despawnEnemy", this.gameObject);
+            gameLogic.GetComponent<gameLogic>().despawnEnemy();
         }
         else
         {

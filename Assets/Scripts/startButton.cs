@@ -6,20 +6,33 @@ public class startButton : MonoBehaviour
 {
     public character_controller controller;
 
-    public bool startRound; 
+    public bool startRound;
+    public bool inRange;
 
     void Start()
     {
         startRound = false;
+        inRange = false;
     }
 
-    void OnTriggerStay(Collider collider)
+    void Update()
     {
-        if(collider.CompareTag("player"))
+        if(inRange)
         {
             if (Input.GetKeyDown(controller.Interact))
                 startRound = true;
-
         }
+    }
+
+    void OnTriggerEnter(Collider collider)
+    {
+        if(collider.CompareTag("player"))
+            inRange = true;
+    }
+
+    void onTriggerExit(Collider collider)
+    {
+        if (collider.CompareTag("player"))
+            inRange = false;
     }
 }

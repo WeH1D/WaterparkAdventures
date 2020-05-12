@@ -59,10 +59,12 @@ public class mouse_aim : MonoBehaviour
         {
             //player is not aiming, camera sets at default position and moves freely around the player
             lookAt = lookAtNoAim;
-            lookAt.transform.Rotate(0, horizontal, 0);
+            //lookAt.transform.Rotate(0, horizontal, 0);
+            player.transform.Rotate(0, horizontal, 0);
+
         }
 
-        
+
         int layerMask = 1 << 10;
 
         //Detects if the camera is abput to get behind the border
@@ -112,12 +114,12 @@ public class mouse_aim : MonoBehaviour
             transform.LookAt(lookAt.transform);
     
         //when character is standing and wants to move, it will move in the direction the camera is facing -> this wont hapen if character is in aim mode
-        if (!isAming && (player.GetComponent<Animator>().GetBool("is_walking") || player.GetComponent<Animator>().GetBool("is_running")))
-        {
-            Quaternion orginalRot = lookAt.transform.rotation;
-            player.transform.rotation = Quaternion.Lerp(player.transform.rotation, lookAt.transform.rotation, Time.deltaTime * 7);
-            lookAt.transform.rotation = orginalRot;
-        }
+        //if (!isAming && (player.GetComponent<Animator>().GetBool("is_walking") || player.GetComponent<Animator>().GetBool("is_running")))
+        //{
+        //    Quaternion orginalRot = lookAt.transform.rotation;
+        //    player.transform.rotation = Quaternion.Lerp(player.transform.rotation, lookAt.transform.rotation, Time.deltaTime * 10);
+        //    lookAt.transform.rotation = orginalRot;
+        //}
 
     }
 }
