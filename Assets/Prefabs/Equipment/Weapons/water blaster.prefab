@@ -128,7 +128,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CurrentAmmo: 100
   MaxAmmo: 100
-  rateOfAmmoSpending: 0.03
+  rateOfAmmoSpending: 0.05
   damage: 0.08
 --- !u!114 &2117400379029968642
 MonoBehaviour:

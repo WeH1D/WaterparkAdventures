@@ -27,7 +27,7 @@ public class mouse_aim : MonoBehaviour
     private GameObject cameraAimPos;
     GameObject lookAt;
     private Vector3 camPos;
-   #pragma warning restore 0649
+#pragma warning restore 0649
 
     // Start is called before the first frame update
     void Start()
@@ -73,7 +73,7 @@ public class mouse_aim : MonoBehaviour
         {
             Debug.DrawLine(new Vector3(player.transform.position.x, player.transform.position.y + 2, player.transform.position.z), wouldBeCamPos, Color.red);
             isHittingWall = true;
-            
+
         }
         else
         {
@@ -88,7 +88,7 @@ public class mouse_aim : MonoBehaviour
         {
             //Camera isn't allowed behind the wall border, but the raycast is still cast towards the "would be position" of the camera so 
             //it knows when the camera can be back at its original position
-            if(isAming)
+            if (isAming)
                 wouldBeCamPos = lookAt.transform.position - (rotation * offsetAim);
             else
                 wouldBeCamPos = lookAt.transform.position - (rotation * offsetNoAim);
@@ -105,14 +105,14 @@ public class mouse_aim : MonoBehaviour
 
         if (isHittingWall)
         {
-            if(isAming)
+            if (isAming)
                 transform.LookAt(lookAt.transform);
             else
                 transform.LookAt(lookAtWhenHittingWall.transform);
         }
         else
             transform.LookAt(lookAt.transform);
-    
+
         //when character is standing and wants to move, it will move in the direction the camera is facing -> this wont hapen if character is in aim mode
         //if (!isAming && (player.GetComponent<Animator>().GetBool("is_walking") || player.GetComponent<Animator>().GetBool("is_running")))
         //{
@@ -120,6 +120,7 @@ public class mouse_aim : MonoBehaviour
         //    player.transform.rotation = Quaternion.Lerp(player.transform.rotation, lookAt.transform.rotation, Time.deltaTime * 10);
         //    lookAt.transform.rotation = orginalRot;
         //}
-
     }
+
+
 }

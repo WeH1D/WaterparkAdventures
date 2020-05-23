@@ -70,7 +70,7 @@ public class character_controller : MonoBehaviour
         }
 
         if (Input.GetKey(Aim))
-            Speed -= 15;
+            Speed -= Speed/2;
 
         playerMovement *= Speed;
 
@@ -113,7 +113,7 @@ public class character_controller : MonoBehaviour
                 else
                 {
                     player_animator.SetBool("attack_one_hand", true);
-                    characterStats.equiped_weapon_object.GetComponent<weapon>().CurrentAmmo -= characterStats.equiped_weapon_object.GetComponent<weapon>().rateOfAmmoSpending;
+                    characterStats.equiped_weapon_object.GetComponent<weapon>().CurrentAmmo -= characterStats.equiped_weapon_object.GetComponent<weapon>().rateOfAmmoSpending * 100 * Time.deltaTime;
                     characterStats.equiped_weapon_object.GetComponent<weapon>().startShooting();
                 }
             }

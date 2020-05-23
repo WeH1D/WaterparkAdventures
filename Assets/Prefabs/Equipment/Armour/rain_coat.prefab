@@ -309,9 +309,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 498a253c6330edd4488e58d75c83d708, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  price: 50
   bonus_speed: 5
-  bonus_health: -50
+  bonus_health: -0.5
   bonus_damage: 0
   bonus_water: 0
 --- !u!114 &3235704979226647432
@@ -331,7 +330,7 @@ MonoBehaviour:
   controller: {fileID: 0}
   character_stats: {fileID: 0}
   thumbnail: {fileID: 0}
-  price: 25
+  price: 150
 --- !u!54 &7620377205388413708
 Rigidbody:
   m_ObjectHideFlags: 0

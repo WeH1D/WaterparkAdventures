@@ -39,7 +39,7 @@ public class enemy_AI : MonoBehaviour
         enemy_stats = transform.GetComponent<enemy_stats>();
         water_stream = weapon.transform.Find("water_stream").Find("water").GetComponent<ParticleSystem>();
 
-        //StartCoroutine(attackLogic());
+        StartCoroutine(attackLogic());
         navMeshAgent = this.GetComponent<NavMeshAgent>();
         destination = GameObject.FindGameObjectWithTag("player");
 
@@ -47,9 +47,6 @@ public class enemy_AI : MonoBehaviour
 
     void Update()
     {
-        navMeshAgent.SetDestination(destination.transform.position);
-
-
         if (isBeingHit)
         {
             health += damageRecived * Time.deltaTime;
@@ -62,14 +59,17 @@ public class enemy_AI : MonoBehaviour
             faint();
             gameLogic.GetComponent<gameLogic>().despawnEnemy();
         }
-        else
+        else if(!isFainted)
         {
+            navMeshAgent.SetDestination(destination.transform.position);
+
             float distance_from_player = Vector3.Distance(transform.position, player.transform.position);
 
             setAllParamsFalse();
 
             if (distance_from_player <= min_max_distance_from_player[1])
             {
+                transform.LookAt(new Vector3(destination.transform.position.x, transform.position.y, destination.transform.position.z));
                 if (distance_from_player > min_max_distance_from_player[0])
                     walk();
                 else
@@ -92,7 +92,6 @@ public class enemy_AI : MonoBehaviour
 
 
     }
-
     void run()
     {
         anim.SetBool("is_running", true);
@@ -107,8 +106,9 @@ public class enemy_AI : MonoBehaviour
 
         if (water_stream.isPlaying)
             water_stream.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
-    }
 
+        navMeshAgent.SetDestination(transform.position);
+    }
     void setAllParamsFalse()
     {
         foreach (AnimatorControllerParameter parameter in anim.parameters)
@@ -119,20 +119,6 @@ public class enemy_AI : MonoBehaviour
     }
 
 
-    private void Attack()
-    {
-        anim.SetBool("attack_one_hand", true);
-
-        if (!water_stream.isPlaying)
-            water_stream.Play();
-    }
-
-    private void DontAttack()
-    {
-        anim.SetBool("attack_one_hand", false);
-        if (water_stream.isPlaying)
-            water_stream.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
-    }
 
     IEnumerator attackLogic()
     {
@@ -143,9 +129,8 @@ public class enemy_AI : MonoBehaviour
             float minWait = 2f;
             float maxWait = 6f;
 
-
             yield return new WaitForSeconds(UnityEngine.Random.Range(minWait, maxWait));
-            if (!attack)
+            if (!attack && !anim.GetBool("is_running"))
             {
                 Attack();
                 attack = true;
@@ -155,8 +140,24 @@ public class enemy_AI : MonoBehaviour
                 DontAttack();
                 attack = false;
             }
+            
         }
     }
+    private void Attack()
+    {
+        anim.SetBool("attack_one_hand", true);
+
+        if (!water_stream.isPlaying)
+            water_stream.Play();
+    }
+    private void DontAttack()
+    {
+        anim.SetBool("attack_one_hand", false);
+        if (water_stream.isPlaying)
+            water_stream.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+    }
+
+
 
     void OnTriggerStay(Collider colision)
     {

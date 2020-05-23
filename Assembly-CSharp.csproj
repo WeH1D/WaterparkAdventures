@@ -69,7 +69,9 @@
      <Compile Include="Assets\Scripts\gameLogic.cs" />
      <Compile Include="Assets\Scripts\lookAtCamera.cs" />
      <Compile Include="Assets\Scripts\mouse_aim.cs" />
+     <Compile Include="Assets\Scripts\offLimitArea.cs" />
      <Compile Include="Assets\Scripts\startButton.cs" />
+     <Compile Include="Assets\Scripts\startScreen.cs" />
      <Compile Include="Assets\Scripts\waterGeneration.cs" />
      <Compile Include="Assets\player\scripts\character_actions_manager.cs" />
      <Compile Include="Assets\player\scripts\character_controller.cs" />

@@ -17,20 +17,22 @@ public class startButton : MonoBehaviour
 
     void Update()
     {
-        if(inRange)
+        if (inRange)
         {
             if (Input.GetKeyDown(controller.Interact))
                 startRound = true;
         }
+        else
+            startRound = false;
     }
 
     void OnTriggerEnter(Collider collider)
     {
-        if(collider.CompareTag("player"))
+        if (collider.CompareTag("player"))
             inRange = true;
     }
 
-    void onTriggerExit(Collider collider)
+    void OnTriggerExit(Collider collider)
     {
         if (collider.CompareTag("player"))
             inRange = false;

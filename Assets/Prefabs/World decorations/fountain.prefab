@@ -88,6 +88,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7831949103563986405}
+  - component: {fileID: 280469346103038129}
+  - component: {fileID: 7879620679764033712}
   m_Layer: 0
   m_Name: fountain
   m_TagString: Untagged
@@ -113,6 +115,35 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &280469346103038129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6551600486419015670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f59a099ce6b76b4fbe20d78c9cb0657, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  instantLoss: 0
+  gameLogic: {fileID: 0}
+  player: {fileID: 0}
+--- !u!136 &7879620679764033712
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6551600486419015670}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 4.776993
+  m_Height: 10.33756
+  m_Direction: 1
+  m_Center: {x: 0.3749752, y: 1.6336274, z: -0.053447723}
 --- !u!1 &6931050990115233133
 GameObject:
   m_ObjectHideFlags: 0

@@ -6295,7 +6295,7 @@ MonoBehaviour:
   healthbar: {fileID: 2951292029104198270}
   weapon: {fileID: 8051924153299588590}
   min_max_distance_from_player:
-  - 10
+  - 15
   - 25
 --- !u!114 &2951292028204976712
 MonoBehaviour:
@@ -6324,8 +6324,8 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 15
-  m_Acceleration: 17
+  m_Speed: 20
+  m_Acceleration: 25
   avoidancePriority: 50
   m_AngularSpeed: 120
   m_StoppingDistance: 15

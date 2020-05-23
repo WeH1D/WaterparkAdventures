@@ -580,9 +580,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 498a253c6330edd4488e58d75c83d708, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  price: 150
   bonus_speed: -5
-  bonus_health: -10
+  bonus_health: -0.1
   bonus_damage: 0
   bonus_water: 100
 --- !u!114 &1339470143473822248

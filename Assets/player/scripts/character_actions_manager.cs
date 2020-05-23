@@ -1,27 +1,35 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class character_actions_manager : MonoBehaviour
 {
     private bool isReloading = false;
-    private bool isBeingHit = false;
+    public bool isBeingHit = false;
     private bool isHealing = false;
 
-    private float damageRecieved;
+    public bool hasLost;
+
+    public float damageRecieved;
 
     private character_stats characterStats;
+    new GameObject camera;
+
+    public GameObject foam;
 
     void Start()
     {
         characterStats = transform.GetComponent<character_stats>();
+        camera = GameObject.FindGameObjectWithTag("MainCamera");
+        hasLost = false;
     }
 
     void Update()
     {
         if (isReloading && characterStats.equiped_weapon_object.GetComponent<weapon>().CurrentAmmo <= characterStats.maxAmmo)
         {
-            characterStats.equiped_weapon_object.GetComponent<weapon>().CurrentAmmo += characterStats.equiped_weapon_object.GetComponent<weapon>().rateOfAmmoSpending * 3;
+            characterStats.equiped_weapon_object.GetComponent<weapon>().CurrentAmmo += characterStats.equiped_weapon_object.GetComponent<weapon>().rateOfAmmoSpending * 100 * Time.deltaTime;
             characterStats.isReloading = true;
         }
         else
@@ -37,12 +45,17 @@ public class character_actions_manager : MonoBehaviour
 
         if (isHealing)
             if(characterStats.health > 0)
-            characterStats.health -= 0.05f * Time.deltaTime;
+                characterStats.health -= 0.05f * Time.deltaTime;
 
-        //if(characterStats.health <= 0)
-        //{
-        //    transform.GetComponent<Animator>().SetBool("is_beaten", true);
-        //}
+        if (characterStats.health >= 1)
+            gameOver();
+
+    }
+
+    private void gameOver()
+    {
+        hasLost = true;
+        transform.GetComponent<Animator>().SetBool("is_beaten", true);
     }
 
     void OnTriggerStay(Collider collider)
@@ -60,7 +73,9 @@ public class character_actions_manager : MonoBehaviour
         if (collider.CompareTag("enemy_weapon"))
         {
             isBeingHit = true;
-            damageRecieved = collider.transform.parent.GetComponent<enemy_weapon>().Damage;
+            if(!foam.GetComponent<ParticleSystem>().isPlaying)
+                foam.GetComponent<ParticleSystem>().Play();
+                damageRecieved = collider.transform.parent.GetComponent<enemy_weapon>().Damage;
         }
 
         if (collider.CompareTag("fan"))
@@ -77,7 +92,11 @@ public class character_actions_manager : MonoBehaviour
                 water.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
         }
         if (collider.CompareTag("enemy_weapon"))
+        {
             isBeingHit = false;
+            if (foam.GetComponent<ParticleSystem>().isPlaying)
+                foam.GetComponent<ParticleSystem>().Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+        }
         if (collider.CompareTag("fan"))
             isHealing = false;
     }
