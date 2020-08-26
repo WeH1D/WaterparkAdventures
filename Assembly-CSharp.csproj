@@ -63,6 +63,7 @@
      <Compile Include="Assets\Scripts\UI\UI.cs" />
      <Compile Include="Assets\Scripts\UI\pauseScreen.cs" />
      <Compile Include="Assets\Scripts\UI\shopItem.cs" />
+     <Compile Include="Assets\Scripts\cameraSwitch.cs" />
      <Compile Include="Assets\Scripts\enemy\enemy_AI.cs" />
      <Compile Include="Assets\Scripts\enemy\enemy_stats.cs" />
      <Compile Include="Assets\Scripts\enemy\enemy_weapon.cs" />
